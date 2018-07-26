@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  .bg-body {
+      background-color: black;
+      background-image: url(bgimg.jpg);
+  }
+  .qr-container {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+  }
+
+  .info {
+    margin-top: 200px;
+    color: white;
+    width: 100%;
+    text-align: center;
+    font-size: small;
+  }
+  </style>
+  <script  type="text/javascript" src="jquery.min.js"></script>
+  <script type="text/javascript" src="qrcode.min.js"></script>
+  <script>
+   function GetQueryString(name) {
+     var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);
+     if (r != null) return unescape(r[2]);
+     return null;
+   }
+
+   function isWeixinOrAlipay(){
+     var ua = window.navigator.userAgent.toLowerCase();
+     //判断是不是微信
+     if ( ua.match(/MicroMessenger/i) == 'micromessenger' ) {
+         return "WeiXIN";
+     }
+     //判断是不是支付宝
+     if (ua.match(/AlipayClient/i) == 'alipayclient') {
+         return "Alipay";
+     }
+     //哪个都不是
+     return "web浏览器打开，默认显示微信二维码";
+   }
+
+   $(document).ready(function() {
+     var from = isWeixinOrAlipay();
+     if (from=="Alipay") {
+       window.location.href=GetQueryString('ali');
+     }else {
+       var code = GetQueryString('wx')||''
+       if (!code) {
+         alert("请传参数");
+         return
+       }
+       document.getElementById('laizhi').innerHTML = '打开的工具是'+from+",二维码值："+code
+       var qrcode = new QRCode(document.getElementById("qrcode"), {
+         width : 200,
+         height : 200
+       });
+      qrcode.makeCode(code);
+     }
+   });
+
+
+ </script>
+</head>
+<body class="bg-body">
+  <div class="qr-container">
+    <p class="info" id="laizhi"></p>
+    <div id="qrcode" style="width:200px; height:200px; margin-top:15px;"></div>
+  </div>
+</body>
+</html>
