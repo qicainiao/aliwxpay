@@ -17,4 +17,6 @@ ali=HTTPS://QR.ALIPAY.COM/FKX041987IXG0B6BVSBRE2?t=1532515010748&wx=wxp://f2f0HF
 将http://192.168.1.130:3000/?ali=HTTPS://QR.ALIPAY.COM/FKX041987IXG0B6BVSBRE2?t=1532515010748&wx=wxp://f2f0HFQwzbh4N2vtBV-KO-v9HDXOKWeGz64e
 这个链接用二维码工具生成一个二维码，然后微信 或者支付宝扫码即可。
 
+3 如果是微信扫码，直接微信支付，支付宝扫码直接支付宝支付，即实现一个二维码支持微信 支付宝两种支付方式
+
 完毕
